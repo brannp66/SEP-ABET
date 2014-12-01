@@ -1,19 +1,3 @@
-<!--  -->
-
-
-<?php
-
-    session_start();
-
-    if(isset($_POST['signIn'])){
-         $_SESSION['email'] = $_POST['email'];
-         $_SESSION['password'] = $_POST['password'];
-
-         header("Location: user_page.php");
-    }
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
