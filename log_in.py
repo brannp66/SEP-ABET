@@ -11,7 +11,7 @@
       <h1>ABET Tallys</h1>
     </div>
     <div id="loginContainer">
-      <form id="login" action = "validateUserLogin.php" method = "post">
+      <form id="login" action = "validateUserLogin.py" method = "post">
         <div class="logEmail">
             <label>Username:</label>
             <input type="username" name = "username" id="username"/>
