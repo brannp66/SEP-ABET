@@ -1,0 +1,9 @@
+html {
+  background-image:url('');
+}
+
+img {
+  float: left;
+  height: 80px;
+  width: auto;
+}
