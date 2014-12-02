@@ -1,9 +1,14 @@
 html {
-  background-image:url('');
+  background-color:#fff;
 }
 
-img {
+#upArrow {
   float: left;
-  height: 80px;
-  width: auto;
+  width:20px;
+  height:15px;
+}
+#downArrow {
+  float: left;
+  width:20px;
+  height:15px;
 }

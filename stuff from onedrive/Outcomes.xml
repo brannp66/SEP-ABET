@@ -1,0 +1,83 @@
+<ABET>
+	<CAC>
+		<outcome>
+			<letter>a</letter>
+			<description>An ability to apply knowledge of computing and mathematics appropriate to the discipline</description>
+			<PerformanceCriteria>Terms</PerformanceCriteria>
+			<PerformanceCriteria>Calculation</PerformanceCriteria>
+			<PerformanceCriteria>Application: Mathematics</PerformanceCriteria>
+			<PerformanceCriteria>Mathematical Modeling</PerformanceCriteria>
+			<PerformanceCriteria>Theory</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>b</letter>
+			<description>An ability to analyze a problem, and identity and define the computing requirements appropriate to its solution</description>
+			<PerformanceCriteria>Demonstrates the ability to analyze a problem, and identify and define the computing requirements appropriate to its solution</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>c</letter>
+			<description>An ability to design, implement, and evaluate a computer-based system, process, component, or program to meet desired needs</description>
+			<PerformanceCriteria>Develop design requirements from the problem statement that meet desired needs</PerformanceCriteria>
+			<PerformanceCriteria>Identify relevant, realistic design constraints from the design requirements</PerformanceCriteria>
+			<PerformanceCriteria>Produce a design that satisfies design requirements within relevant, realistic constraints</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>d</letter>
+			<description>An ability to function effectively on teams to accomplish a common goal</description>
+			<PerformanceCriteria>Contribution to team effort</PerformanceCriteria>
+			<PerformanceCriteria>Quality of contribution to the team effort</PerformanceCriteria>
+			<PerformanceCriteria>Contributions to team discussions</PerformanceCriteria>
+			<PerformanceCriteria>Contributuions to team decisions</PerformanceCriteria>
+			<PerformanceCriteria>Preparation for team meetings</PerformanceCriteria>
+			<PerformanceCriteria>Attendance at team meetings</PerformanceCriteria>
+			<PerformanceCriteria>Support of team members</PerformanceCriteria>
+			<PerformanceCriteria>Response to conflict</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>e</letter>
+			<description>An understanding of professional, ethical, legal, security and social issues and responsibilities</description>
+			<PerformanceCriteria>Knowledge of the code of ethics in the discipline</PerformanceCriteria>
+			<PerformanceCriteria>Recognize the ethical dimension of an issue in the discipline</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>f</letter>
+			<description>An ability to communicate effectively with a range of audiences</description>
+			<PerformanceCriteria>Oral: O1. Content</PerformanceCriteria>
+			<PerformanceCriteria>Oral: O2. Delivery</PerformanceCriteria>
+			<PerformanceCriteria>Written: W1. Content</PerformanceCriteria>
+			<PerformanceCriteria>Written: W2. Structure and Mechanics</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>g</letter>
+			<description>An ability to analyze the local and global impact of computing on individuals, organizations, and society</description>
+			<PerformanceCriteria>Demonstrates an ability to analyze the local impact of computing on individuals, organizations, and society</PerformanceCriteria>
+			<PerformanceCriteria>Demonstrates an ability to analyze the global impact of computing on individuals, organizations, and society</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>h</letter>
+			<description>Recognition of the need for and an ability to engage in continuing professional development</description>
+			<PerformanceCriteria>Professional Development Activities</PerformanceCriteria>
+			<PerformanceCriteria>Transfer Materials and/or Concepts</PerformanceCriteria>
+			<PerformanceCriteria>Reference Material Sources</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>i</letter>
+			<description>An abiility to use current tecniques, skills, and tools necessary for computing practice.</description>
+			<PerformanceCriteria>Demonstrates an appropriate skil level using a given technique for computing practice</PerformanceCriteria>
+			<PerformanceCriteria>Demonstartes an appropriate skill level using a given modern (current) tool for computing practice</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>j</letter>
+			<description>An ability to apply mathematical foundations, algorithmic principles, and computer science theory in the modeling and design of computer-based systems in a way that demonstrates comprehension of the tradeoffs involved in design choices</description>
+			<PerformanceCriteria>Demonstrates an ability to apply mathematical foundations to computer-based systems in a way that demonstrates tradeoffs in design choices</PerformanceCriteria>
+			<PerformanceCriteria>Demonstrates an ability to apply algorithmic principles and computer science theory to computer-based systems in a way that demonstrates tradeoffs in design choices</PerformanceCriteria>
+		</outcome>
+		<outcome>
+			<letter>k</letter>
+			<description>Able to apply design and development pronciples in the construction of software of varying complexity</description>
+			<PerformanceCriteria>Demonstrate an ability to apply design and development principles in the construction of software of varying complexity</PerformanceCriteria>
+		</outcome>
+	</CAC>
+	<EAC>
+	</EAC>
+</ABET>
