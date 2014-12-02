@@ -23,6 +23,7 @@
   <body>
 
   	<form action='courseInfo.php' method = 'POST'>
+      <input type='hidden' name='semester' value = <?php echo '"' . $semester . '"' ?>>
   		<select name = 'course'>
   			<?php
   				foreach($courseList as $course){

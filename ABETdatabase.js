@@ -94,7 +94,7 @@ db.CourseOutcomes.insert(
 		},
 		{ "courseId":"cse5387",
 			"courseName":"Digital Systems Design",
-			"CACOutcomes":["NULL"]
+			"CACOutcomes":["NULL"],
 			"EACOutcomes":["C", "K"]
 		}
 	]

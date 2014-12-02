@@ -31,7 +31,7 @@ function getStudents($courseID, $instructor, $semester){
 	$conditions = array('$and' => array(array('semester' => $semester),
 		array('instructor' => $instructor), array('course' => $courseID)));
 
-	$result = $allCourses->find($conditions);
+	$result = $allCourses->findOne($conditions);
 
 	$studentsCAC = $result['studentsCAC'];
 	$studentsEAC = $result['studentsEAC'];
@@ -48,51 +48,26 @@ function getCourseNameAndOutcomes($courseID){
 
 	$allCourseOutcomes = new MongoCollection($db, 'CourseOutcomes');
 
-	$conditions = array('courseID' => $courseID);
+	$conditions = array('courseId' => $courseID);
 
-	$result = $allCourseOutcomes->find($conditions);
+	$result = $allCourseOutcomes->findOne($conditions);
 
 	$courseName = $result['courseName'];
-	$CACOutcomes = $result['CACOutcomes'];
-	$EACOutcomes = $result['EACOutcomes'];
+
+	if($result['CACOutcomes'][0] != 'NULL')
+		$CACOutcomes = $result['CACOutcomes'];
+	else
+		$CACOutcomes = NULL;
+
+	if($result['EACOutcomes'][0] != 'NULL')
+		$EACOutcomes = $result['EACOutcomes'];
+	else
+		$EACOutcomes = NULL;
 
 	$courseInfo = array($courseName, $CACOutcomes, $EACOutcomes);
 
 	return $courseInfo;
 
-
-
-
-
-	/*
-
-
-
-
-
-	
-
-	$testCourseOneCAC = array('a', 'b', 'e');
-	$testCourseOneEAC = array('c', 'g');
-
-
-
-	if($courseID == 1341){
-		$courseName = "Java";
-		$courseOutcomesCAC = array('a', 'b', 'e');
-		$courseOutcomesEAC = array('c','g');
-	}
-	else{
-		$courseName = "C++";
-		$courseOutcomesCAC = array('c', 'g', 'i');
-		$courseOutcomesEAC = array('C', 'h', 'k');
-	}
-
-
-
-	$courseInfo = array($courseName, $courseOutcomesCAC, $courseOutcomesEAC);
-
-	return $courseInfo;*/
 }
 
 

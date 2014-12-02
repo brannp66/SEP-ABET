@@ -9,7 +9,7 @@
   $studentListCAC = $studentList[0];
   $studentListEAC = $studentList[1];
 
-  $courseInfo = getCourseNameAndOutcomes($course['course']);
+  $courseInfo = getCourseNameAndOutcomes($course);
 
   $courseName = $courseInfo[0];
   $CACOutcomes = $courseInfo[1];
@@ -30,8 +30,8 @@
 
   <body>
     <?php
-      echo sprintf('Course Name: %s, CAC Students: %s, EAC Students: %s, CAC Outcomes: %s, EAC Outcomes: %s',
-        $courseName, $studentListCAC, $studentListEAC, $CACOutcomes, $EACOutcomes);
+      echo sprintf('Course Name: %s, CAC Student1: %s, EAC Student1: %s, CAC Outcome1: %s, EAC Outcome1: %s',
+        $courseName, $studentListCAC[0], $studentListEAC[0], $CACOutcomes[0], $EACOutcomes[0]);
 
     ?>
 
