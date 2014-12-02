@@ -70,7 +70,44 @@ function getCourseNameAndOutcomes($courseID){
 
 }
 
+function getMeasuredOutcomes($semester, $courseId){
 
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
+
+	$allCourseOutcomes = new MongoCollection($db, 'CourseOutcomes');
+	$allCycles = new MongoCollection($db, 'CycleOfOutcomes');
+
+	$courseConditions = array('courseId' => $courseId);
+	$cycleConditions = array('semester' => $semester);
+
+	$courseOutcomes = $allCourseOutcomes->findOne($courseConditions);
+	$cycleOutcomes = $allCycles->findOne($cycleConditions);
+
+	$cac = array();
+	$eac = array();
+
+	if($courseOutcomes['CACOutcomes'][0] != NULL){
+		foreach($courseOutcomes['CACOutcomes'] as $course){
+			foreach($cycleOutcomes['CACOutcomes'] as $cycle){
+				if($course == $cycle)
+					array_push($cac, $course);
+			}
+		}
+	}
+	if($courseOutcomes['EACOutcomes'][0] != NULL){
+		foreach($courseOutcomes['EACOutcomes'] as $course){
+			foreach($cycleOutcomes['EACOutcomes'] as $cycle){
+				if($course == $cycle)
+					array_push($eac, $course);
+			}
+		}
+	}
+
+	$commonOutcomes = array($cac, $eac);
+
+	return $commonOutcomes;
+}
 
 
 
