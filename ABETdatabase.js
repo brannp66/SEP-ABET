@@ -40,14 +40,17 @@ db.CourseOutcomes.insert(
 		{ "courseId":"cse3330",
 			"courseName":"Database Concepts",
 			"CACOutcomes":["C", "G"],
+			"EACOutcomes":["NULL"]
 		},
 		{ "courseId":"cse3342",
 			"courseName":"Programming Languages",
 			"CACOutcomes":["C", "F"],
+			"EACOutcomes":["NULL"]
 		},
 		{ "courseId":"cse3345",
 			"courseName":"Graphical User Interface Design",
 			"CACOutcomes":["F", "I"],
+			"EACOutcomes":["NULL"]
 		},
 		{ "courseId":"cse3353",
 			"courseName":"Fundamentals of Algorithms",
@@ -66,7 +69,8 @@ db.CourseOutcomes.insert(
 		},
 		{ "courseId":"cse4345",
 			"courseName":"Software Engineering Principles",
-			"CACOutcomes":["C", "D", "F"]
+			"CACOutcomes":["C", "D", "F"],
+			"EACOutcomes":["NULL"]
 		},
 		{ "courseId":"cse4351",
 			"courseName":"Senior Design I",
@@ -90,6 +94,7 @@ db.CourseOutcomes.insert(
 		},
 		{ "courseId":"cse5387",
 			"courseName":"Digital Systems Design",
+			"CACOutcomes":["NULL"]
 			"EACOutcomes":["C", "K"]
 		}
 	]
