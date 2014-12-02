@@ -1,57 +1,32 @@
-var majors =
-							{
-								"major": [
-									"Computer Science",
-									"Computer Engineering"
-								]
-							}
-
-var TEMP_COURSE = "CSE 4345-801";
-var TEMP_SEMESTER = "Fall 2014"
-var TEMP_INSTRUCTOR = "Frank Coyle";
-var TEMP_OUTCOME = 
-								{
-							    "letter": "c",
-							    "description": "An ability to design, implement, and evaluate a computer-based system, process, component, or program to meet desired needs",
-							    "PerformanceCriteria": [
-							      "Develop design requirements from the problem statement that meet desired needs",
-							      "Identify relevant, realistic design constraints from the design requirements",
-							      "Produce a design that satisfies design requirements within relevant, realistic constraints"
-							    ]
-							  };
-var TEMP_STUDENTS = 
-								{
-    					    "students": [
-    					      {
-        				    	"CS": [
-        				    		"Ferrante",
-        					  		"Franjac",
-        					  		"Gambino",
-        					  		"Hodges",
-        					  		"Horst",
-        					  		"Kim",
-        					  		"Meng",
-        					  		"Roberts",
-        					  		"Vickers"
-        					  	]
-        					  },
-        					  {
-        					  	"CpE": [
-        					  		"Appel",
-        					  		"Halac",
-        					  		"Meng"
-        					  	]	
-        					  }
-    						  ]
-							  }
-
 $( document ).ready(function() {
-	var headerDiv = getHeaderDiv(TEMP_COURSE, TEMP_SEMESTER, TEMP_INSTRUCTOR, TEMP_OUTCOME);
+	var form = {
+    "instructor": "coyle",
+    "semester": "Fall2014",
+    "courseId": "cse3342",
+    "courseName": "Programming Languages",
+    "studentsCAC": [
+        "roolo berger",
+        "marcy klaust"
+    ],
+    "studentsEAC": [
+        "wilfred barry",
+        "maximillian schell"
+    ],
+    "rubrics": [
+        "rubric 1",
+        "rubric 2"
+    ],
+    "description": "test description"
+}
+	var headerDiv = getHeaderDiv(form);
 	document.body.appendChild(headerDiv);
 
-	var i = 0;
-	for(var major in majors.major){
-		var tableDiv = getTableDiv(majors.major[major], TEMP_OUTCOME, TEMP_STUDENTS.students[i++]);
+	if(form['studensCAC']) {
+		var tableDiv = getCACTableDiv(form);
+		document.body.appendChild(tableDiv);
+	}
+	if(form['studentsEAC']) {
+		var tableDiv = getEACTableDiv(form);
 		document.body.appendChild(tableDiv);
 	}
 
@@ -60,7 +35,7 @@ $( document ).ready(function() {
 
 });
 
-var getHeaderDiv = function(course, semester, instructor, outcome) {
+var getHeaderDiv = function(form) {
 	var header = document.createElement("div");
 
 	var courseElement = document.createElement("h3");
@@ -71,13 +46,13 @@ var getHeaderDiv = function(course, semester, instructor, outcome) {
 	var todaysDate = getTodaysDate();
 	var outcomeElement = document.createElement("h5");
 
-	courseElement.innerHTML = course;
-	semesterElement.innerHTML = semester;
-	instructorElement.innerHTML = "Instructor: " + instructor;
+	courseElement.innerHTML = form['courseId'];
+	semesterElement.innerHTML = form['semester'];
+	instructorElement.innerHTML = "Instructor: " + form['instructor'];
 	dateElement.innerHTML = "Date: ";
 	dateInput.setAttribute("type", "date");
 	dateInput.setAttribute("value", todaysDate);
-	outcomeElement.innerHTML = "Outcome: " + outcome.description;
+	outcomeElement.innerHTML = "Outcome: " + form['description'];
 
 	dateElement.appendChild(dateInput);
 
@@ -90,30 +65,45 @@ var getHeaderDiv = function(course, semester, instructor, outcome) {
 	return header;
 }
 
-var getTableDiv = function(major, outcome, students) {	
+var getCACTableDiv = function(form) {	
 	var tableDiv = document.createElement("div");
-	var description = document.createElement("h4");
-	var table = getTable(outcome.PerformanceCriteria);
-	var studentList = getStudentListElement(students);
+	var major = document.createElement("h4");
+	var table = getTable(form['rubrics']);
+	var studentList = getStudentListElement(form['studentsCAC']);
 
-	description.innerHTML = major;
+	major.innerHTML = "CSE";
 
-	tableDiv.appendChild(description);
+	tableDiv.appendChild(major);
 	tableDiv.appendChild(table);
 	tableDiv.appendChild(studentList);
 
 	return tableDiv;	
 }
 
-var getTable = function(criteria) {
+var getEACTableDiv = function(form) {	
+	var tableDiv = document.createElement("div");
+	var major = document.createElement("h4");
+	var table = getTable(form['rubrics']);
+	var studentList = getStudentListElement(form['studentsEAC']);
+
+	major.innerHTML = "CpE";
+
+	tableDiv.appendChild(major);
+	tableDiv.appendChild(table);
+	tableDiv.appendChild(studentList);
+
+	return tableDiv;	
+}
+
+var getTable = function(rubrics) {
 	var table = document.createElement("table");
 
 	table.appendChild(getTableHeader());
 
-	for(var i = 0; i < criteria.length; i++) {
+	for(var i = 0; i < rubrics.length; i++) {
 		var row = document.createElement("tr");
 		var cell = document.createElement("td");
-		cell.innerHTML = criteria[i];
+		cell.innerHTML = rubrics[i];
 		row.appendChild(cell);
 		for(var j = 0; j < 4; j++) {
 			cell - document.createElement("td");
@@ -150,17 +140,16 @@ var getTableHeader = function() {
 }
 
 var getStudentListElement = function(studentList) {
-	var major = Object.keys(studentList);
-	var listElement = document.createElement("p");
-	listElement.innerHTML = major + " Students: ";
-	for(var i = 0; i < studentList[major].length; i++) {
-		listElement.innerHTML += studentList[major][i] + ", ";
-	}
+		var listElement = document.createElement("p");
+		listElement.innerHTML =" Students: ";
+		for(var i = 0; i < studentList.length; i++) {
+			listElement.innerHTML += studentList[i] + ", ";
+		}
 
-	//slice off trailing comma
-	listElement.innerHTML = listElement.innerHTML.slice(0,-2);
+		//slice off trailing comma
+		listElement.innerHTML = listElement.innerHTML.slice(0,-2);
 
-	return listElement;
+		return listElement;
 }
 
 var getTodaysDate = function() {
