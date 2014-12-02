@@ -76,13 +76,16 @@ class Form {
 	}
 }
 
-$m = new MongoClient(); //connect
-$db = $m->selectDB("ABET");
+function getDescription($letter, $type) {
+	$m = new MongoClient(); //connect
+	$db = $m->selectDB("ABET");
 
-$list = $db->listCollections();
-foreach ($list as $collection) {
-	echo "amount of documents in $collection: ";
-	echo $collection->count(), "\n";
+	$outcomes = new MongoCollection($db, 'Outcomes');
+	$conditions = array('$and' => array(array('letter' => $letter), array('type' => $type)));
+
+	$result = $outcomes->findOne($conditions);
+
+	return $result['description'];
 }
 
 $testInstructor = "coyle";
@@ -98,11 +101,8 @@ $testForm = new Form($testInstructor, $testSemester, $testCourseId,
 										 $testDescription);
 echo json_encode($testForm);
 
-function getDescription($letter, $type) {
-	$m = new MongoClient(); //connect
-	$db = $m->selectDB("ABET");
+$testGetDescription = getDescription("A", "CAC");
 
-	$db->
-}
+echo $testGetDescription;
 
 ?>
