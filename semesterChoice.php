@@ -3,6 +3,8 @@
 
 	$semester = $_POST['test'];
 
+	$_POST['semester'] = $semester;
+
 	$courseList = getCourseList('coyle', $semester);
 
 ?>
@@ -20,16 +22,14 @@
 
   <body>
 
-  	<form action='courseChoice.php' method = 'POST'>
-  		<select name = 'courses'>
+  	<form action='courseInfo.php' method = 'POST'>
+  		<select name = 'course'>
   			<?php
-  				
+  				foreach($courseList as $course){
+  					echo sprintf('<option value="%s">%s</option>', $course['course'], $course['course']);
+  				}
 
   			?>
-
-
-
-
   		</select>
   		<input type='submit' value = "Select Course">
   	</form>

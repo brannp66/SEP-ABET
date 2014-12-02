@@ -22,22 +22,47 @@ function getCourseList($instructor, $semester){
 }
 
 function getStudents($courseID, $instructor, $semester){
-	/*
 
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
 
+	$allCourses = new MongoCollection($db, 'ClassRoster');
 
+	$conditions = array('$and' => array(array('semester' => $semester),
+		array('instructor' => $instructor), array('course' => $courseID)));
 
-	*/
+	$result = $allCourses->find($conditions);
 
+	$studentsCAC = $result['studentsCAC'];
+	$studentsEAC = $result['studentsEAC'];
 
-	$studentList = array('john', 'mary', 'james', 'waldo', 'nobody', 'mithranor', 'Dumbeldore');
-
+	$studentList = array($studentsCAC, $studentsEAC);
 	return $studentList;
 }
 
 
 function getCourseNameAndOutcomes($courseID){
 
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
+
+	$allCourseOutcomes = new MongoCollection($db, 'CourseOutcomes');
+
+	$conditions = array('courseID' => $courseID);
+
+	$result = $allCourseOutcomes->find($conditions);
+
+	$courseName = $result['courseName'];
+	$CACOutcomes = $result['CACOutcomes'];
+	$EACOutcomes = $result['EACOutcomes'];
+
+	$courseInfo = array($courseName, $CACOutcomes, $EACOutcomes);
+
+	return $courseInfo;
+
+
+
+
 
 	/*
 
@@ -45,7 +70,7 @@ function getCourseNameAndOutcomes($courseID){
 
 
 
-	*/
+	
 
 	$testCourseOneCAC = array('a', 'b', 'e');
 	$testCourseOneEAC = array('c', 'g');
@@ -67,7 +92,7 @@ function getCourseNameAndOutcomes($courseID){
 
 	$courseInfo = array($courseName, $courseOutcomesCAC, $courseOutcomesEAC);
 
-	return $courseInfo;
+	return $courseInfo;*/
 }
 
 
