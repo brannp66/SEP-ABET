@@ -58,7 +58,7 @@ var getHeaderDiv = function(form) {
 var getCACTableDiv = function(form) {	
 	var tableDiv = document.createElement("div");
 	var major = document.createElement("h4");
-	var table = getTable(form['rubrics']);
+	var table = getTable(form['rubrics'],"CAC");
 	var studentList = getStudentListElement(form['studentsCAC']);
 
 	major.innerHTML = "CSE";
@@ -73,7 +73,7 @@ var getCACTableDiv = function(form) {
 var getEACTableDiv = function(form) {	
 	var tableDiv = document.createElement("div");
 	var major = document.createElement("h4");
-	var table = getTable(form['rubrics']);
+	var table = getTable(form['rubrics'], "EAC");
 	var studentList = getStudentListElement(form['studentsEAC']);
 
 	major.innerHTML = "CpE";
@@ -85,8 +85,9 @@ var getEACTableDiv = function(form) {
 	return tableDiv;	
 }
 
-var getTable = function(rubrics) {
+var getTable = function(rubrics, type) {
 	var table = document.createElement("table");
+
 
 	table.appendChild(getTableHeader());
 
@@ -97,7 +98,7 @@ var getTable = function(rubrics) {
 		row.appendChild(cell);
 		for(var j = 0; j < 4; j++) {
 			cell = document.createElement("td");
-			cell.innerHTML = "<input type=\"number\" min=\"0\" max=\"100\" value=\"0\">";
+			cell.innerHTML = "<input type=\"number\" min=\"0\" max=\"100\" value=\"0\" name=\"" + type + "-" + i + "-" + j + "\">";
 			row.appendChild(cell);
 		}
 		table.appendChild(row);
@@ -161,6 +162,7 @@ var getBasisDiv = function () {
 	var basis = document.createElement("div");
 	var label = document.createElement("h3");
 	var input = document.createElement("INPUT");
+	input.setAttribute("name", "basedOn");
 	var note = document.createElement("h6");
 
 	label.innerHTML = "The above evaluation is based on:";

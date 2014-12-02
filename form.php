@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+include 'phpAPI.php';
+
+$form = json_decode($_POST['form']);
+$_SESSION['semester'] = $form->{'semester'};
+$_SESSION['courseId'] = $form->{'courseId'};
+$_SESSION['instructor'] = $form->{'instructor'};
+$_SESSION['CACOutcome'] = $form->{'CACOutcome'};
+$_SESSION['EACOutcome'] = $form->{'EACOutcome'};
+?>
+
 <!doctype html>
 <html lang="en">
 	<head>

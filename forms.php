@@ -28,7 +28,13 @@ error_reporting(0);
 		$jsonForm = json_encode($form);
 		echo "<form method='POST' action='form.php'>";
 		echo "<input type='hidden' name='form' value='".$jsonForm."'>";
-		echo $form->getName() . "<input type='submit' value='Generate'>";
+		//if($form['CACOutcome'] != NULL) {
+			//echo " CAC-" . $form['CACOutcome'] . " ";
+		//}
+		//if($form['EACOutcome'] != NULL) {
+			//echo " EAC-" . $from['EACOutcome'] . " ";
+		//}
+		echo "<input type='submit' value='Generate'>";
 		echo "</form>";
 	}
 ?>

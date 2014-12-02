@@ -1,6 +1,6 @@
 <?php
 class Form {
-	public function Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $name) {
+	public function Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $CACOutcome, $EACOutcome) {
 		$this->instructor = $instructor;
 		$this->semester = $semester;
 		$this->courseId = $courseId;
@@ -9,7 +9,8 @@ class Form {
 		$this->studentsEAC = $studentsEAC;
 		$this->rubrics = $rubrics;
 		$this->description = $description;
-		$this->name = $name;
+		$this->CACOutcome = $CACOutcome;
+		$this->EACOutcome = $EACOutcome;
 	}
 
 	public function setInstructor($instructor) {
@@ -76,8 +77,12 @@ class Form {
 		return $this->description;
 	}
 
-	public function getName() {
-		return $this->name;
+	public function getCACOutcome() {
+		return $this->CACOutcome;
+	}
+
+	public function getEACOutcome() {
+		return $this->EACOutcome;
 	}
 }
 
@@ -111,24 +116,26 @@ function getForms($instructor, $semester, $courseId) {
 		if($formType['CAC']) {
 			$studentsCAC = $students[0];
 			$description = getDescription($formType['CAC'], "CAC");
-			$name = $name . " CAC-" . $formType['CAC'];
+			$CACOutcome = $formType['CAC'];
 		}
 		else {
 			$studentsCAC = NULL;
+			$CACOutcome = NULL;
 			$description = getDescription($formType['EAC'], "EAC");
 		}
 
 		if($formType['EAC']) {
 			$studentsEAC = $students[1];
-			$name = $name . " EAC-" . $formType['EAC'];
+			$EACOutcome = $formType['EAC'];
 		}
 		else {
 			$studentsEAC = NULL;
+			$EACOutcome = NULL;
 		}
 
 		$rubrics = $formType["rubrics"];
 
-		$form = new Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $name);
+		$form = new Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $CACOutcome, $EACOutcome);
 		array_push($forms, $form);
 	}
 	return $forms;
