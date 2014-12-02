@@ -2,7 +2,7 @@
   session_start();
 	include 'phpAPI.php';
 
-	$semester = $_POST['test'];
+	$semester = $_POST['semester'];
 
   $_SESSION['semester'] = $semester;
 

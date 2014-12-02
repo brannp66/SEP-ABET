@@ -1,4 +1,164 @@
 <?php
+class Form {
+	public function Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $name) {
+		$this->instructor = $instructor;
+		$this->semester = $semester;
+		$this->courseId = $courseId;
+		$this->courseName = $courseName;
+		$this->studentsCAC = $studentsCAC;
+		$this->studentsEAC = $studentsEAC;
+		$this->rubrics = $rubrics;
+		$this->description = $description;
+		$this->name = $name;
+	}
+
+	public function setInstructor($instructor) {
+		$this->instructor = $instuctor;
+	}
+
+	public function setSemester($semester) {
+		$this->semester = $semester;
+	}
+
+	public function setCourseId($courseId) {
+		$this->courseId = $courseId;
+	}
+
+	public function setCourseName($courseName) {
+		$this->courseName = $courseName;
+	}
+
+	public function setStudentsCAC($studentsCAC) {
+		$this->studentsCAC = $studentsCAC;
+	}
+
+	public function setStudentsEAC($studentsEAC) {
+		$this->studentsEAC = $studentsEAC;
+	}
+
+	public function setRubrics($rubrics) {
+		$this->rubrics = $rubrics;
+	}
+
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	public function getInstructor() {
+		return $this->instructor;
+	}
+
+	public function getSemester() {
+		return $this->semester;
+	}
+
+	public function getCourseID() {
+		return $this->courseId;
+	}
+
+	public function getCourseName() {
+		return $this->courseName;
+	}
+
+	public function getStudentsCAC() {
+		return $this->studentsCAC;
+	}
+
+	public function getStudentsEAC() {
+		return $this->studentsEAC;
+	}
+
+	public function getRubrics() {
+		return $this->rubrics;
+	}
+
+	public function getDescription() {
+		return $this->description;
+	}
+
+	public function getName() {
+		return $this->name;
+	}
+}
+
+function getDescription($letter, $type) {
+	$m = new MongoClient(); //connect
+	$db = $m->selectDB("ABET");
+
+	$outcomes = new MongoCollection($db, 'Outcomes');
+	$conditions = array('$and' => array(array('letter' => $letter), array('type' => $type)));
+
+	$result = $outcomes->findOne($conditions);
+
+	return $result['description'];
+}
+
+function getForms($instructor, $semester, $courseId) {
+	$forms = array();
+
+	$courseInfo = getCourseNameAndOutcomes($courseId);
+	$courseName = $courseInfo[0];
+	
+	$outcomes = getMeasuredOutcomes($semester, $courseId);
+	$CACOutcomes = $outcomes[0];
+	$EACOutcomes = $outcomes[1];
+
+	$students = getStudents($courseId, $instructor, $semester);
+
+	$formTypes = getFormTypes($CACOutcomes, $EACOutcomes);
+	foreach($formTypes as $formType) {
+		$name = "";
+		if($formType['CAC']) {
+			$studentsCAC = $students[0];
+			$description = getDescription($formType['CAC'], "CAC");
+			$name = $name . " CAC-" . $formType['CAC'];
+		}
+		else {
+			$studentsCAC = NULL;
+			$description = getDescription($formType['EAC'], "EAC");
+		}
+
+		if($formType['EAC']) {
+			$studentsEAC = $students[1];
+			$name = $name . " EAC-" . $formType['EAC'];
+		}
+		else {
+			$studentsEAC = NULL;
+		}
+
+		$rubrics = $formType["rubrics"];
+
+		$form = new Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $name);
+		array_push($forms, $form);
+	}
+	return $forms;
+}
+
+function getFormTypes($CACOutcomes, $EACOutcomes) {
+	$forms = array();
+
+	$m = new MongoClient(); //connect
+	$db = $m->selectDB("ABET");
+
+	$matches = new MongoCollection($db, 'EACandCACMatchups');
+	$results = $matches->find();
+
+	foreach($results as $result) {
+		if(in_array($result['EAC'], $EACOutcomes) && in_array($result['CAC'], $CACOutcomes)) {
+			$tempArray = array("CAC" => $result['CAC'], "EAC" => $result['EAC'], "rubrics" => $result['rubrics']);			array_push($forms, $tempArray);
+		}
+		else if(in_array($result['CAC'], $CACOutcomes)) {
+			$tempArray = array("CAC" => $result['CAC'], "rubrics" => $result['rubrics']);
+			array_push($forms, $tempArray);
+		}
+		else if(in_array($result['EAC'], $EACOutcomes)) {
+			$tempArray = array("EAC" => $result['EAC'], "rubrics" => $result['rubrics']);
+			array_push($forms, $tempArray);
+		}
+	}
+
+	return $forms;
+}
 
 function getCourseList($instructor, $semester){
 	$client = new MongoClient();
@@ -40,7 +200,6 @@ function getStudents($courseID, $instructor, $semester){
 	return $studentList;
 }
 
-
 function getCourseNameAndOutcomes($courseID){
 
 	$client = new MongoClient();
@@ -67,7 +226,6 @@ function getCourseNameAndOutcomes($courseID){
 	$courseInfo = array($courseName, $CACOutcomes, $EACOutcomes);
 
 	return $courseInfo;
-
 }
 
 function getMeasuredOutcomes($semester, $courseId){
@@ -108,10 +266,4 @@ function getMeasuredOutcomes($semester, $courseId){
 
 	return $commonOutcomes;
 }
-
-
-
-
-
-
 ?>
