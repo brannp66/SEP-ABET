@@ -1,6 +1,44 @@
 <?php
 
-getCourseList($instructor, $semester){
+function getCourseList($instructor, $semester){
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
+
+	$allCourses = new MongoCollection($db, 'ClassRoster');
+
+	$conditions = array('$and' => array(array('semester' => $semester), 
+		array('instructor' => $instructor)));
+
+	$results = $allCourses->find($conditions);
+
+	$courseList = array();
+
+	foreach($results as $result){
+		array_push($courseList, $result);
+	}
+
+
+	return $courseList;
+}
+
+function getStudents($courseID, $instructor, $semester){
+	/*
+
+
+
+
+	*/
+
+
+	$studentList = array('john', 'mary', 'james', 'waldo', 'nobody', 'mithranor', 'Dumbeldore');
+
+	return $studentList;
+}
+
+
+function getCourseNameAndOutcomes($courseID){
+
+
 	/*
 
 
@@ -9,30 +47,28 @@ getCourseList($instructor, $semester){
 
 	*/
 
-	$testCourseOneName = "Java";
-	$testCourseTwoName = "C++";
-
-	$testCourseOneID = 1341;
-	$testCourseTwoID = 1342;
-
 	$testCourseOneCAC = array('a', 'b', 'e');
 	$testCourseOneEAC = array('c', 'g');
 
-	$testCourseTwoCAC = array('c', 'g', 'i');
-	$testCourseTwoEAC = array('C', 'h', 'k');
 
-	$testCourseOne = array($testCourseOneName, $testCourseOneID, $testCourseOneCAC, $testCourseOneEAC);
-	$testCourseTwo = array($testCourseTwoName, $testCourseTwoID, $testCourseTwoCAC, $testCourseTwoEAC);
 
-	$courseList = array($testCourseOne, $testCourseTwo);
+	if($courseID == 1341){
+		$courseName = "Java";
+		$courseOutcomesCAC = array('a', 'b', 'e');
+		$courseOutcomesEAC = array('c','g');
+	}
+	else{
+		$courseName = "C++";
+		$courseOutcomesCAC = array('c', 'g', 'i');
+		$courseOutcomesEAC = array('C', 'h', 'k');
+	}
 
-	return $courseList;
+
+
+	$courseInfo = array($courseName, $courseOutcomesCAC, $courseOutcomesEAC);
+
+	return $courseInfo;
 }
-
-
-
-
-
 
 
 
