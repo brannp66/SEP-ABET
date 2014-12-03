@@ -14,7 +14,7 @@ include 'phpAPI.php';
     	function loadCourses(str) {
 				var instructor = <?php echo(json_encode($_SESSION['instructor'])); ?>;
 				if(str=="") {
-					document.getElementById("course").innerHTML = "";
+					document.getElementById("courses").innerHTML = "";
 					return;
 				}
 				else
@@ -31,7 +31,7 @@ include 'phpAPI.php';
 					{
 						if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						{
-							document.getElementById("course").innerHTML=xmlhttp.responseText;
+							document.getElementById("courses").innerHTML=xmlhttp.responseText;
 						}
 					}
 					xmlhttp.open("GET","getCourses.php?s="+str+"&i="+instructor,true);
@@ -43,7 +43,7 @@ include 'phpAPI.php';
 	<body>
 		<div class='choose'>
 			<form action='forms.php' method="POST">
-				<div class='dropdown' id='semester'>
+				<div class='dropdown'>
 					<select name = 'semester' onchange="loadCourses(this.value)">
 						<option value="" disabled selected style='display:none;'>Select Semester</option>
 						<option value="Fall2014">Fall 2014</option>
@@ -55,7 +55,7 @@ include 'phpAPI.php';
 						<option value="Fall2017">Fall 2017</option>
 					</select>
 				</div>
-				<div class='dropdown' id='course'>
+				<div class='dropdown' id='courses'>
 				</div>
 				<input type='submit' value='View Forms' class='button tiny'>
 			</form>

@@ -1,12 +1,10 @@
 function generateForm(form) {
-
-	var formDiv = document.createElement("div");
+	var formDiv = document.getElementById("form");
 	var headerDiv = getHeaderDiv(form);
 	formDiv.appendChild(headerDiv);
 	var formTag = document.createElement("form");
 	formTag.setAttribute("action", "saveForm.php");
 	formTag.setAttribute("method", "POST");
-	formDiv.setAttribute("class", "form");
 
 	if(form['studentsCAC']) {
 		var tableDiv = getCACTableDiv(form);
@@ -27,7 +25,7 @@ function generateForm(form) {
 	formTag.appendChild(submitButton);
 
 	formDiv.appendChild(formTag);
-	document.body.appendChild(formDiv);
+	//document.body.appendChild(formDiv);
 }
 
 var getHeaderDiv = function(form) {

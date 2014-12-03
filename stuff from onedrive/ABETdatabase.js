@@ -11,6 +11,18 @@ db.ClassRoster.insert(
 			"instructor":"coyle",
 			"studentsCAC":["mixdorf berger", "barney rubble"],
 			"studentsEAC":["wilfred barry", "roger schonbergell"]
+		},
+		{ "semester":"Spring2015",
+			"course":"testCourse",
+			"instructor":"test",
+			"studentsCAC":["roolo berger", "marcy klaust"],
+			"studentsEAC":["wilfred barry", "maximillian schell"]
+		},
+		{ "semester":"Spring2015",
+			"course":"testCourse2",
+			"instructor":"test",
+			"studentsCAC":["mixdorf berger", "barney rubble"],
+			"studentsEAC":["wilfred barry", "roger schonbergell"]
 		}
 	]
 )
@@ -96,6 +108,16 @@ db.CourseOutcomes.insert(
 			"courseName":"Digital Systems Design",
 			"CACOutcomes":["NULL"],
 			"EACOutcomes":["C", "K"]
+		},
+		{ "courseId":"testCourse",
+			"courseName":"Test Course",
+			"CACOutcomes":["A","H"],
+			"EACOutcomes":["A","D"]
+		},
+		{ "courseId":"testCourse2",
+			"courseName":"Test Course 2",
+			"CACOutcomes":["A","H"],
+			"EACOutcomes":["A","D"]
 		}
 	]
 )
@@ -329,6 +351,11 @@ db.Users.insert(
 		{
 			"name":"coyle",
 			"password":"password",
+			"type":"instructor"
+		},
+		{
+			"name":"test",
+			"password":"test",
 			"type":"instructor"
 		},
 		{

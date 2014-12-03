@@ -2,13 +2,15 @@
 	session_start();
 	if (isset($_POST['submit'])) {
 		if (!$_POST['username'] | !$_POST['password']) {
-			echo "<script type='text/javascript'>alert('You did not complete all the required fields');</script>";
+			echo "<script type='text/javascript'>alert('You did not complete all the 
+						required fields');</script>";
 		}
 
 		$m = new MongoClient(); //connect
 		$db = $m->selectDB("ABET");
 		$users = new MongoCollection($db, 'Users');
-		$conditions = array('$and' => array(array('name' => $_POST['username']), array('password' => $_POST['password'])));
+		$conditions = array('$and' => array(array('name' => $_POST['username']), 
+									array('password' => $_POST['password'])));
 
 		if($conditions.count() === 1) {
 			if($_POST['username'] == "admin") {
@@ -19,7 +21,8 @@
 			}
 		}
 		else{ 
-			echo "<script type='text/javascript'>alert('Incorect Credentials');</script>";
+			echo "<script type='text/javascript'>alert('Incorect Credentials');
+						</script>";
 		}
 		
 
@@ -41,7 +44,8 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
   </head>
 	<body>
 		<div class='login'>

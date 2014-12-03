@@ -9,6 +9,7 @@ $_SESSION['courseId'] = $form->{'courseId'};
 $_SESSION['instructor'] = $form->{'instructor'};
 $_SESSION['CACOutcome'] = $form->{'CACOutcome'};
 $_SESSION['EACOutcome'] = $form->{'EACOutcome'};
+$_SESSION['numRubrics'] = count($form->{'rubrics'});
 ?>
 
 <!doctype html>
@@ -24,6 +25,9 @@ $_SESSION['EACOutcome'] = $form->{'EACOutcome'};
     <script src="js/vendor/modernizr.js"></script>
 	</head>
 	<body>
+		<div class='form' id='form'> 
+
+		</div>
 		<script type='text/javascript'>generateForm(<?php echo $_POST['form'] ?>);</script>
 	</body>
 </html>
