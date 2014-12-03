@@ -1,10 +1,12 @@
 function generateForm(form) {
+
+	var formDiv = document.createElement("div");
 	var headerDiv = getHeaderDiv(form);
-	document.body.appendChild(headerDiv);
+	formDiv.appendChild(headerDiv);
 	var formTag = document.createElement("form");
 	formTag.setAttribute("action", "saveForm.php");
 	formTag.setAttribute("method", "POST");
-	formTag.setAttribute("class", "form");
+	formDiv.setAttribute("class", "form");
 
 	if(form['studentsCAC']) {
 		var tableDiv = getCACTableDiv(form);
@@ -24,7 +26,8 @@ function generateForm(form) {
 	submitButton.setAttribute("class", "button tiny")
 	formTag.appendChild(submitButton);
 
-	document.body.appendChild(formTag);
+	formDiv.appendChild(formTag);
+	document.body.appendChild(formDiv);
 }
 
 var getHeaderDiv = function(form) {
@@ -43,6 +46,7 @@ var getHeaderDiv = function(form) {
 
 	instructorElement.innerHTML = "Instructor: " + form['instructor'];
 	instructorElement.setAttribute("id","instructor");
+	instructorElement.setAttribute("style","text-transform:capitalize");
 	
 	outcomeElement.innerHTML = "Outcome:  <strong>" + form['description'] + "</strong>";
 	outcomeElement.setAttribute("id", "outcome");
