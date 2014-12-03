@@ -12,3 +12,71 @@ html {
   width:20px;
   height:15px;
 }
+
+.login {
+	position: relative;
+	margin: 0 auto;
+	padding: 20px 20px 20px;
+	width: 310px;
+	background: white;
+	border-radius:3px;
+	box-shadow: 0 0 200px rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.choose {
+	position: relative;
+	margin: 0 auto;
+	padding: 20px 20px 20px;
+	width: 310px;
+	background: white;
+	border-radius:3px;
+	box-shadow: 0 0 200px rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.form {
+	position: relative;
+	margin: 0 auto;
+	padding: 20px 20px 20px;
+	width: 750px;
+	background: white;
+	border-radius:3px;
+	box-shadow: 0 0 200px rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+}
+
+#course {
+	float:left;
+}
+
+#semester {
+	float:right;
+}
+
+#instructor {
+	clear:left;
+}
+
+#outcome {
+	clear:both;
+}
+
+#basis {
+
+}
+
+h3 {
+	font-size: 18px;
+}
+
+h4 {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+h5 {
+	font-size: 14px;
+}
+
+h6 {
+	font-weight: bold;
+	font-size: 14px;
+}

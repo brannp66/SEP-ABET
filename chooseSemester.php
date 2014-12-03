@@ -11,8 +11,7 @@ include 'phpAPI.php';
     <script src="js/vendor/modernizr.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-    	function loadCourses(str)
-			{
+    	function loadCourses(str) {
 				var instructor = <?php echo(json_encode($_SESSION['instructor'])); ?>;
 				if(str=="") {
 					document.getElementById("course").innerHTML = "";
@@ -42,22 +41,24 @@ include 'phpAPI.php';
 		</script>
   </head>
 	<body>
-		<form action='forms.php' method="POST">
-			<div class='dropdown' id='semester'>
-				<select name = 'semester' onchange="loadCourses(this.value)">
-					<option value="" disabled selected style='display:none;'>Select Semester</option>
-					<option value="Fall2014">Fall 2014</option>
-					<option value="Spring2015">Spring 2015</option>
-					<option value="Fall2015">Fall 2015</option>
-					<option value="Spring2016">Spring 2016</option>
-					<option value="Fall2016">Fall 2016</option>
-					<option value="Spring2017">Spring 2017</option>
-					<option value="Fall2017">Fall 2017</option>
-				</select>
-			</div>
-			<div class='dropdown' id='course'>
-			</div>
-			<input type='submit' value='View Forms'>
-		</form>
+		<div class='choose'>
+			<form action='forms.php' method="POST">
+				<div class='dropdown' id='semester'>
+					<select name = 'semester' onchange="loadCourses(this.value)">
+						<option value="" disabled selected style='display:none;'>Select Semester</option>
+						<option value="Fall2014">Fall 2014</option>
+						<option value="Spring2015">Spring 2015</option>
+						<option value="Fall2015">Fall 2015</option>
+						<option value="Spring2016">Spring 2016</option>
+						<option value="Fall2016">Fall 2016</option>
+						<option value="Spring2017">Spring 2017</option>
+						<option value="Fall2017">Fall 2017</option>
+					</select>
+				</div>
+				<div class='dropdown' id='course'>
+				</div>
+				<input type='submit' value='View Forms' class='button tiny'>
+			</form>
+		</div>
 	</body>
 </html>

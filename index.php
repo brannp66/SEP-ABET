@@ -53,7 +53,7 @@
 				<p>
 					<input type="password" name="password" value placeholder="Password">
 				</p>
-				<input type="submit" value="Login" name='submit'>
+				<input type="submit" value="Login" name='submit' class='button'>
 			</form>
 		</div>
 	</body>

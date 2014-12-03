@@ -4,6 +4,7 @@ function generateForm(form) {
 	var formTag = document.createElement("form");
 	formTag.setAttribute("action", "saveForm.php");
 	formTag.setAttribute("method", "POST");
+	formTag.setAttribute("class", "form");
 
 	if(form['studentsCAC']) {
 		var tableDiv = getCACTableDiv(form);
@@ -20,6 +21,7 @@ function generateForm(form) {
 	var submitButton = document.createElement("INPUT");
 	submitButton.setAttribute("type", "submit");
 	submitButton.setAttribute("value", "Submit");
+	submitButton.setAttribute("class", "button tiny")
 	formTag.appendChild(submitButton);
 
 	document.body.appendChild(formTag);
@@ -31,25 +33,24 @@ var getHeaderDiv = function(form) {
 	var courseElement = document.createElement("h3");
 	var semesterElement = document.createElement("h3");
 	var instructorElement = document.createElement("h5");
-	var dateElement = document.createElement("h5");
-	var dateInput = document.createElement("INPUT");
-	var todaysDate = getTodaysDate();
 	var outcomeElement = document.createElement("h5");
 
 	courseElement.innerHTML = form['courseId'].toUpperCase();
+	courseElement.setAttribute("id","course");
+	
 	semesterElement.innerHTML = form['semester'];
-	instructorElement.innerHTML = "Instructor: " + form['instructor'];
-	dateElement.innerHTML = "Date: ";
-	dateInput.setAttribute("type", "date");
-	dateInput.setAttribute("value", todaysDate);
-	outcomeElement.innerHTML = "Outcome: " + form['description'];
+	semesterElement.setAttribute("id","semester");
 
-	dateElement.appendChild(dateInput);
+	instructorElement.innerHTML = "Instructor: " + form['instructor'];
+	instructorElement.setAttribute("id","instructor");
+	
+	outcomeElement.innerHTML = "Outcome:  <strong>" + form['description'] + "</strong>";
+	outcomeElement.setAttribute("id", "outcome");
+
 
 	header.appendChild(courseElement);
 	header.appendChild(semesterElement);
 	header.appendChild(instructorElement);
-	header.appendChild(dateElement);
 	header.appendChild(outcomeElement);
 
 	return header;
@@ -61,7 +62,7 @@ var getCACTableDiv = function(form) {
 	var table = getTable(form['rubrics'],"CAC");
 	var studentList = getStudentListElement(form['studentsCAC']);
 
-	major.innerHTML = "CSE";
+	major.innerHTML = "Computer Science Undergrads";
 
 	tableDiv.appendChild(major);
 	tableDiv.appendChild(table);
@@ -76,7 +77,7 @@ var getEACTableDiv = function(form) {
 	var table = getTable(form['rubrics'], "EAC");
 	var studentList = getStudentListElement(form['studentsEAC']);
 
-	major.innerHTML = "CpE";
+	major.innerHTML = "Computer Engineering Undergrads";
 
 	tableDiv.appendChild(major);
 	tableDiv.appendChild(table);
@@ -87,7 +88,6 @@ var getEACTableDiv = function(form) {
 
 var getTable = function(rubrics, type) {
 	var table = document.createElement("table");
-
 
 	table.appendChild(getTableHeader());
 
@@ -109,22 +109,22 @@ var getTable = function(rubrics, type) {
 var getTableHeader = function() {
 	var row = document.createElement("tr");
 
-	var data = document.createElement("td");
+	var data = document.createElement("th");
 	row.appendChild(data);
 
-	var data = document.createElement("td");
+	var data = document.createElement("th");
 	data.appendChild(document.createTextNode('1 (weak)'));
 	row.appendChild(data);
 
-	var data = document.createElement("td");
+	var data = document.createElement("th");
 	data.appendChild(document.createTextNode('2 (poor)'));
 	row.appendChild(data);
 
-	var data = document.createElement("td");
+	var data = document.createElement("th");
 	data.appendChild(document.createTextNode('3 (good)'));
 	row.appendChild(data);
 
-	var data = document.createElement("td");
+	var data = document.createElement("th");
 	data.appendChild(document.createTextNode('4 (excellent)'));
 	row.appendChild(data);
 
@@ -132,7 +132,7 @@ var getTableHeader = function() {
 }
 
 var getStudentListElement = function(studentList) {
-		var listElement = document.createElement("p");
+		var listElement = document.createElement("h5");
 		listElement.innerHTML =" Students: ";
 		for(var i = 0; i < studentList.length; i++) {
 			listElement.innerHTML += studentList[i] + ", ";
@@ -143,27 +143,13 @@ var getStudentListElement = function(studentList) {
 
 		return listElement;
 }
-
-var getTodaysDate = function() {
-	var date  = new Date();
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	var year = date.getFullYear();
-
-	if (day < 10) day = "0" + day;
-	if (month < 10) month = "0" + month;
-
-	var today = year + "-" + month + "-" + day;
-
-	return today;
-}
-
 var getBasisDiv = function () {
 	var basis = document.createElement("div");
-	var label = document.createElement("h3");
-	var input = document.createElement("INPUT");
+	var label = document.createElement("h4");
+	var input = document.createElement("textarea");
 	input.setAttribute("name", "basedOn");
-	var note = document.createElement("h6");
+	input.setAttribute("id", "basis");
+	var note = document.createElement("h5");
 
 	label.innerHTML = "The above evaluation is based on:";
 	note.innerHTML = "This can be a project, an assignment or homework. Please list above - or provide reference to the basis of evaluation (e.g. Assignment 2, Exam - question 5, etc.)";

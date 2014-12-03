@@ -34,7 +34,7 @@ error_reporting(0);
 		if($form->getEACOutcome()) {
 			echo " EAC-" . $form->getEACOutcome() . " ";
 		}
-		echo "<input type='submit' value='Generate'>";
+		echo "<input type='submit' value='Generate' class='button tiny'>";
 		echo "</form>";
 	}
 ?>
