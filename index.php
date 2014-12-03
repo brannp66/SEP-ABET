@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if (isset($_POST['submit'])) {
 		if (!$_POST['username'] | !$_POST['password']) {
 			echo "<script type='text/javascript'>alert('You did not complete all the required fields');</script>";
@@ -26,6 +27,7 @@
 			header("Location: admin.php");
 		}
 		else {
+			$_SESSION['instructor'] = $_POST['username'];
 			header("Location: chooseSemester.php");
 		}
 	}
@@ -36,17 +38,23 @@
   <head>
     <title>ABET Accredidation</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
 	<body>
-		<form method="POST" action="index.php">
-			Username: <input type="text" name="username">
-			<br>
-			Password: <input type="password" name="password">
-			<br>
-			<input type="submit" value="Login" name='submit'>
-		</form>
+		<div class='login'>
+			<h1>Login</h1>
+			<form method="POST" action="index.php">
+				<p>
+					<input type="text" name="username" value placeholder="Username">
+				</p>
+				<p>
+					<input type="password" name="password" value placeholder="Password">
+				</p>
+				<input type="submit" value="Login" name='submit'>
+			</form>
+		</div>
 	</body>
 </html>

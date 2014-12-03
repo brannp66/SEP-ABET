@@ -18,7 +18,7 @@ error_reporting(0);
 <?php
 	include 'phpAPI.php';
 
-	$semester = $_SESSION['semester'];
+	$semester = $_POST['semester'];
 	$courseId = $_POST['course'];
 	$instructor = $_SESSION['instructor'];
 
@@ -28,12 +28,12 @@ error_reporting(0);
 		$jsonForm = json_encode($form);
 		echo "<form method='POST' action='form.php'>";
 		echo "<input type='hidden' name='form' value='".$jsonForm."'>";
-		//if($form['CACOutcome'] != NULL) {
-			//echo " CAC-" . $form['CACOutcome'] . " ";
-		//}
-		//if($form['EACOutcome'] != NULL) {
-			//echo " EAC-" . $from['EACOutcome'] . " ";
-		//}
+		if($form->getCACOutcome()) {
+			echo " CAC-" . $form->getCACOutcome() . " ";
+		}
+		if($form->getEACOutcome()) {
+			echo " EAC-" . $form->getEACOutcome() . " ";
+		}
 		echo "<input type='submit' value='Generate'>";
 		echo "</form>";
 	}
