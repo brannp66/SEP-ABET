@@ -20,8 +20,10 @@ if($data["CACOutcome"] && $data["EACOutcome"]) {
 		$CACOutcome[$CAC] = array();
 		$EACOutcome[$EAC] = array();
 		for($j = 0; $j < 4; $j++) {
-			array_push($CACOutcome[$CAC], $_POST[$keys[$i]]);
-			array_push($EACOutcome[$EAC], $_POST[$keys[($i+$j+$numRubrics)]]);
+			$keyIndex = ($i*4)+$j;
+			$offset = 4*$numRubrics;
+			array_push($CACOutcome[$CAC], $_POST[$keys[$keyIndex]]);
+			array_push($EACOutcome[$EAC], $_POST[$keys[($keyIndex + $offset)]]);
 		}
  	}
  	$data['CACResults'] = $CACOutcome;
@@ -34,7 +36,8 @@ else if ($data["CACOutcome"]) {
 		$CAC = getEntry($data['CACOutcome'], $i);
 		$CACOutcome[$CAC] = array();
 		for($j = 0; $j < 4; $j++) {
-			array_push($CACOutcome[$CAC], $_POST[$keys[$i]]);
+			$keyIndex = ($i*4)+$j;
+			array_push($CACOutcome[$CAC], $_POST[$keys[$keyIndex]]);
 		}
 	}
 	$data['CACResults'] = $CACOutcome;
@@ -46,7 +49,8 @@ else if ($data["EACOutcome"]) {
 		$EAC = getEntry($data['EACOutcome'], $i);
 		$EACOutcome[$EAC] = array();
 		for($j = 0; $j < 4; $j++) {
-			array_push($EACOutcome[$EAC], $_POST[$keys[$i]]);
+			$keyIndex = ($i*4)+$j;
+			array_push($EACOutcome[$EAC], $_POST[$keys[$keyIndex]]);
 		}
 	}
 	$data['EACResults'] = $EACOutcome;
@@ -59,7 +63,7 @@ $db = $m->selectDB("ABET");
 $collection = new MongoCollection($db, 'Results');
 $collection->insert($data);
 
-header("Location: chooseSemester.php");
+//header("Location: chooseSemester.php");
 
 function getEntry($letter, $rubricNumber) {
 	$entry = $letter . ($rubricNumber+1);
