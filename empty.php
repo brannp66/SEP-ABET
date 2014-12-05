@@ -15,12 +15,14 @@ error_reporting(0);
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
 	<body>
-		<h1>There doesn't seem to be any data for that outcome + semester</h1>
+		<div class='form'>
+		<h3>There doesn't seem to be any data for that outcome + semester</h3>
 		<button id="btn">Go Back</button>
 		<script type="text/javascript">
 		    document.getElementById("btn").onclick = function () {
 		        location.href = "admin.php";
 		    };
 		</script>
+	</div>
 	</body>
 </html>
