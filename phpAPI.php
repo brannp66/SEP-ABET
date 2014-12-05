@@ -86,6 +86,34 @@ class Form {
 	}
 }
 
+function getStats($letter, $type, $semester){
+
+	$m = new MongoClient(); //connect
+	$db = $m->selectDB("ABET");
+
+	$allResults = new MongoCollection($db, 'Results');
+
+	$type = strtoupper($type);
+	$letter = strtoupper($letter);
+
+	$type = $type . 'Outcome';
+
+	$conditions = array('$and' => array(array($type => $letter), 
+		array('semester' => $semester)));
+
+	$results = $allResults->find($conditions);
+
+	$outcomes = array();
+
+	foreach ($results as $result){
+		array_push($outcomes, $result);
+	}
+
+	return $outcomes;
+
+
+}
+
 function getDescription($letter, $type) {
 	$m = new MongoClient(); //connect
 	$db = $m->selectDB("ABET");
