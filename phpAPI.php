@@ -322,7 +322,6 @@ function getSemesterOutcomes($semester){
 	$cycleOutcomes = $allCycles->findOne($cycleConditions);
 
 	return $cycleOutcomes;
-
 }
 
 function getCourseOutcomes($courseId) {
