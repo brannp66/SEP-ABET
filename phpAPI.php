@@ -265,17 +265,8 @@ function getCourseNameAndOutcomes($courseID){
 
 function getMeasuredOutcomes($semester, $courseId){
 
-	$client = new MongoClient();
-	$db = $client->selectDB('ABET');
-
-	$allCourseOutcomes = new MongoCollection($db, 'CourseOutcomes');
-	$allCycles = new MongoCollection($db, 'CycleOfOutcomes');
-
-	$courseConditions = array('courseId' => $courseId);
-	$cycleConditions = array('semester' => $semester);
-
-	$courseOutcomes = $allCourseOutcomes->findOne($courseConditions);
-	$cycleOutcomes = $allCycles->findOne($cycleConditions);
+	$courseOutcomes = getCourseOutcomes($courseId);
+	$cycleOutcomes = getSemesterOutcomes($semester);
 
 	$cac = array();
 	$eac = array();
@@ -300,5 +291,26 @@ function getMeasuredOutcomes($semester, $courseId){
 	$commonOutcomes = array($cac, $eac);
 
 	return $commonOutcomes;
+}
+
+function getSemesterOutcomes($semester){
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
+	$allCycles = new MongoCollection($db, 'CycleOfOutcomes');
+	$cycleConditions = array('semester' => $semester);
+	$cycleOutcomes = $allCycles->findOne($cycleConditions);
+
+	return $cycleOutcomes;
+
+}
+
+function getCourseOutcomes($courseId) {
+	$client = new MongoClient();
+	$db = $client->selectDB('ABET');
+	$allCourseOutcomes = new MongoCollection($db, 'CourseOutcomes');
+	$courseConditions = array('courseId' => $courseId);
+	$courseOutcomes = $allCourseOutcomes->findOne($courseConditions);
+
+	return $courseOutcomes;
 }
 ?>

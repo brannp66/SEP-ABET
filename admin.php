@@ -10,17 +10,45 @@ include 'phpAPI.php';
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-    	function toggleButton(str) {
-    		var elements = document.getElementsByClassName("btn");
-    		for(var i = 0; i < elements.length; i++){
-					if(str=="") {
-						elements[i].disabled = true;
+	  <script>
+  //   	function toggleButton(str) {
+  //   		var elements = document.getElementsByClassName("btn");
+  //   		for(var i = 0; i < elements.length; i++){
+		// 			if(str=="") {
+		// 				elements[i].disabled = true;
+		// 			}
+		// 			else
+		// 			{
+		// 				elements[i].disabled = false;
+		// 			}
+		// 		}
+		</script>
+  
+		<script>
+    	function getOutcomes(str) {
+				if(str=="") {
+					document.getElementById("form").innerHTML = "";
+					return;
+				}
+				else
+				{
+					if (window.XMLHttpRequest)
+					{
+						xmlhttp = new XMLHttpRequest();
 					}
 					else
 					{
-						elements[i].disabled = false;
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 					}
+					xmlhttp.onreadystatechange=function()
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{
+							document.getElementById("form").innerHTML=xmlhttp.responseText;
+						}
+					}
+					xmlhttp.open("GET","getCycle.php?s="+str,true);
+					xmlhttp.send();
 				}
 			}
 		</script>
@@ -29,7 +57,7 @@ include 'phpAPI.php';
 	<body>
 		<div class='choose'>				
 			<div class='dropdown'>
-				<select name = 'semester' onchange="toggleButton(this.value)">
+				<select name = 'semester' onchange="getOutcomes(this.value)">
 					<option value="" disabled selected style='display:none;'>Select Semester</option>
 					<option value="Fall2014">Fall 2014</option>
 					<option value="Spring2015">Spring 2015</option>
@@ -43,8 +71,8 @@ include 'phpAPI.php';
 		</div>
 
 		<div id = "OutcomeForms">
-			<form action='stats.php' method = 'POST'>
-				<h1>CAC Results</h1>
+			<form action='stats.php' method = 'POST' id='form'>
+<!-- 				<h1>CAC Results</h1>
 				<button type="submit" value = 'cac=a' name='form' class='btn' disabled>CAC-A</button>
 				<button type="submit" value = 'cac=b' name='form' class='btn' disabled>CAC-B</button>
 				<button type="submit" value = 'cac=c' name='form' class='btn' disabled>CAC-C</button>
@@ -68,7 +96,7 @@ include 'phpAPI.php';
 				<button type="submit" value = 'eac=i' name='form' class='btn' disabled>EAC-I</button>
 				<button type="submit" value = 'eac=j' name='form' class='btn' disabled>EAC-J</button>
 				<button type="submit" value = 'eac=k' name='form' class='btn' disabled>EAC-K</button>
-
+ -->
 			</form>
 		</div>
 	</body>
