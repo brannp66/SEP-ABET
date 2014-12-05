@@ -114,6 +114,18 @@ function getStats($letter, $type, $semester){
 
 }
 
+function getRubricDescriptions($letter, $type){
+	$m = new MongoClient(); //connect
+	$db = $m->selectDB("ABET");
+
+	$outcomes = new MongoCollection($db, 'EACandCACMatchups');
+
+	$conditions = array($type => $letter);
+
+	$result = $outcomes->findOne($conditions);
+
+	return $result['rubrics'];
+}
 function getDescription($letter, $type) {
 	$m = new MongoClient(); //connect
 	$db = $m->selectDB("ABET");
