@@ -8,13 +8,16 @@ error_reporting(0);
 	<meta charset="utf-8">
 		<title>Outcome Sheet</title>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="generateForm.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+		</script>
+		<script src="js/generateForm.js"></script>
 		<link rel="stylesheet" href="css/foundation.css" />
+		<link rel="stylesheet" href="css/style.css" />
     <script src="js/vendor/modernizr.js"></script>
 </head>
 <body>
-
+<div class='choose'>
+	<h3>Choose Outcome</h3>
 <?php
 	include 'phpAPI.php';
 
@@ -38,6 +41,6 @@ error_reporting(0);
 		echo "</form>";
 	}
 ?>
-
+</div>
 </body>
 </html>

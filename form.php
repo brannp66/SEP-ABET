@@ -18,8 +18,9 @@ $_SESSION['numRubrics'] = count($form->{'rubrics'});
 		<meta charset="utf-8">
 		<title>Outcome Sheet</title>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="generateForm.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+		</script>
+		<script src="js/generateForm.js"></script>
 		<link rel="stylesheet" href="css/foundation.css" />
 		<link rel="stylesheet" href="css/style.css" />
     <script src="js/vendor/modernizr.js"></script>
@@ -28,6 +29,8 @@ $_SESSION['numRubrics'] = count($form->{'rubrics'});
 		<div class='form' id='form'> 
 
 		</div>
-		<script type='text/javascript'>generateForm(<?php echo $_POST['form'] ?>);</script>
+		<script type='text/javascript'>
+			generateForm(<?php echo $_POST['form'] ?>);
+		</script>
 	</body>
 </html>

@@ -6,11 +6,13 @@ $outcomeList = getSemesterOutcomes($semester);
 
 echo "<h3>CAC Outcomes</h3>";
 foreach($outcomeList['CACOutcomes'] as $outcome) {
-	echo "<button type='submit' value='CAC-" . $outcome . "' name='form' class='btn'>CAC-" . $outcome . "</button>";
+	echo "<button type='submit' value='CAC-" . $outcome . "' name='form' 
+				class='btn'>CAC-" . $outcome . "</button>";
 }
 echo "<h3>EAC Outcomes</h3>";
 foreach($outcomeList['EACOutcomes'] as $outcome) {
-	echo "<button type='submit' value='EAC-" . $outcome . "' name='form' class='btn'>EAC-" . $outcome . "</button>";
+	echo "<button type='submit' value='EAC-" . $outcome . "' name='form' 
+				class='btn'>EAC-" . $outcome . "</button>";
 }
 
 ?>

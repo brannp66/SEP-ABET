@@ -18,6 +18,7 @@ error_reporting(0);
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
 	<body>
+		<div class='form'>
 		<?php
 
 			$letter = substr($form, -1);
@@ -45,27 +46,30 @@ error_reporting(0);
 					$stats[$letter . strval($j+1)]['excellent'] += $results[$i][$type . 
 					'Results'][$letter . strval($j+1)][3];
 
-					$stats[$letter . strval($j+1)]['rowTotal'] = $stats[$letter . strval($j+1)]['excellent'] + 
-					$stats[$letter . strval($j+1)]['good'] + $stats[$letter . strval($j+1)]['poor'] + 
+					$stats[$letter . strval($j+1)]['rowTotal'] = $stats[$letter . 
+					strval($j+1)]['excellent'] + 
+					$stats[$letter . strval($j+1)]['good'] + $stats[$letter . 
+					strval($j+1)]['poor'] + 
 					$stats[$letter . strval($j+1)]['weak'];
 				}
 			}
 			$descriptions = getRubricDescriptions($letter, $type);
 
-			echo '<h1>' . $type . '-' . $letter . '</h1>';
+			echo '<h3>' . $type . '-' . $letter . '</h3>';
 
-			echo '<h2>' . getDescription($letter, $type) . '</h2>';
+			echo '<h5>Outcome: <strong>' . getDescription($letter, $type) . '</strong>
+						</h5>';
 
 		?>
 
 		<table>
 			<tr>
-				<td></td>
-				<td>1(weak)</td>
-				<td>2(poor)</td>
-				<td>3(good)</td>
-				<td>4(excellent)</td>
-				<td>%S+E</td>
+				<th></td>
+				<th>1(weak)</td>
+				<th>2(poor)</td>
+				<th>3(good)</td>
+				<th>4(excellent)</td>
+				<th>%S+E</td>
 			</tr>
 			<?php
 				for($i=1; $i< count($stats); $i++){
@@ -96,5 +100,12 @@ error_reporting(0);
 				}
 			?>
 		</table>
+		<button id="btn">Go Back</button>
+		<script type="text/javascript">
+    document.getElementById("btn").onclick = function () {
+        location.href = "admin.php";
+    };
+</script>
+	</div>
 	</body>
 </html>

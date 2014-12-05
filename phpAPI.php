@@ -1,6 +1,8 @@
 <?php
 class Form {
-	public function Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $CACOutcome, $EACOutcome) {
+	public function Form($instructor, $semester, $courseId, $courseName, 
+											 $studentsCAC, $studentsEAC, $rubrics, $description, 
+											 $CACOutcome, $EACOutcome) {
 		$this->instructor = $instructor;
 		$this->semester = $semester;
 		$this->courseId = $courseId;
@@ -126,12 +128,14 @@ function getRubricDescriptions($letter, $type){
 
 	return $result['rubrics'];
 }
+
 function getDescription($letter, $type) {
 	$m = new MongoClient(); //connect
 	$db = $m->selectDB("ABET");
 
 	$outcomes = new MongoCollection($db, 'Outcomes');
-	$conditions = array('$and' => array(array('letter' => $letter), array('type' => $type)));
+	$conditions = array('$and' => array(array('letter' => $letter), 
+																			array('type' => $type)));
 
 	$result = $outcomes->findOne($conditions);
 
@@ -175,7 +179,9 @@ function getForms($instructor, $semester, $courseId) {
 
 		$rubrics = $formType["rubrics"];
 
-		$form = new Form($instructor, $semester, $courseId, $courseName, $studentsCAC, $studentsEAC, $rubrics, $description, $CACOutcome, $EACOutcome);
+		$form = new Form($instructor, $semester, $courseId, $courseName, 
+										 $studentsCAC, $studentsEAC, $rubrics, $description, 
+										 $CACOutcome, $EACOutcome);
 		array_push($forms, $form);
 	}
 	return $forms;
@@ -191,8 +197,11 @@ function getFormTypes($CACOutcomes, $EACOutcomes) {
 	$results = $matches->find();
 
 	foreach($results as $result) {
-		if(in_array($result['EAC'], $EACOutcomes) && in_array($result['CAC'], $CACOutcomes)) {
-			$tempArray = array("CAC" => $result['CAC'], "EAC" => $result['EAC'], "rubrics" => $result['rubrics']);			array_push($forms, $tempArray);
+		if(in_array($result['EAC'], $EACOutcomes) && 
+			 in_array($result['CAC'], $CACOutcomes)) {
+			$tempArray = array("CAC" => $result['CAC'], "EAC" => $result['EAC'], 
+												 "rubrics" => $result['rubrics']);
+			array_push($forms, $tempArray);
 		}
 		else if(in_array($result['CAC'], $CACOutcomes)) {
 			$tempArray = array("CAC" => $result['CAC'], "rubrics" => $result['rubrics']);

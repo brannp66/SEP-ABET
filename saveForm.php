@@ -63,7 +63,7 @@ $db = $m->selectDB("ABET");
 $collection = new MongoCollection($db, 'Results');
 $collection->insert($data);
 
-//header("Location: chooseSemester.php");
+header("Location: chooseSemester.php");
 
 function getEntry($letter, $rubricNumber) {
 	$entry = $letter . ($rubricNumber+1);
