@@ -65,23 +65,32 @@ error_reporting(0);
 				<td>2(poor)</td>
 				<td>3(good)</td>
 				<td>4(excellent)</td>
+				<td>%S+E</td>
 			</tr>
 			<?php
 				for($i=1; $i< count($stats); $i++){
 					echo "<tr>";
 					echo "<td>" . $descriptions[$i-1] . "</td>";
 
-						echo "<td>" . ($stats[$letter . strval($i)]['weak']/
-						$stats[$letter . strval($i)]['rowTotal']) *100 . "%</td>";
+					echo "<td>" . ($stats[$letter . strval($i)]['weak']/
+					$stats[$letter . strval($i)]['rowTotal']) *100 . "%</td>";
 
-						echo "<td>" . ($stats[$letter . strval($i)]['poor']/
-						$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
+					echo "<td>" . ($stats[$letter . strval($i)]['poor']/
+					$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
 
-						echo "<td>" . ($stats[$letter . strval($i)]['good']/
-						$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
+					echo "<td>" . ($stats[$letter . strval($i)]['good']/
+					$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
 
-						echo "<td>" . ($stats[$letter . strval($i)]['excellent']/
-						$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
+					echo "<td>" . ($stats[$letter . strval($i)]['excellent']/
+					$stats[$letter . strval($i)]['rowTotal'])*100 . "%</td>";
+
+					$excellent = ($stats[$letter . strval($i)]['excellent']/
+					$stats[$letter . strval($i)]['rowTotal'])*100;
+
+					$good = ($stats[$letter . strval($i)]['good']/
+					$stats[$letter . strval($i)]['rowTotal'])*100;
+
+					echo "<td>" . ($good+$excellent) . "%</td>";
 					
 					echo "</tr>";
 				}
