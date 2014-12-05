@@ -29,6 +29,10 @@ error_reporting(0);
 
 			$results = getStats($letter, $type, $semester);
 
+			if(count($results) < 1){
+				header("Location: empty.php");
+			}
+
 			$stats = array(array());
 
 			for($i=0; $i< count($results); $i++){
