@@ -35,6 +35,8 @@ error_reporting(0);
 
 			$stats = array(array());
 
+			//get the stats for each class of an outcome and combine them
+
 			for($i=0; $i< count($results); $i++){
 				for($j=0; $j< count($results[$i][$type . 'Results']); $j++){
 
@@ -76,6 +78,8 @@ error_reporting(0);
 				<th>%S+E</td>
 			</tr>
 			<?php
+
+			//display the stats as percentages in a table
 				for($i=1; $i< count($stats); $i++){
 					echo "<tr>";
 					echo "<td>" . $descriptions[$i-1] . "</td>";
