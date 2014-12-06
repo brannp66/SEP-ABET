@@ -6,33 +6,37 @@ function testGetStats() {
 	$semester = "Spring2014";
 	$type = "CAC";
 
-	$expectedResult = "";
+	$expectedResult = "Is variable and is shown in the final
+	results on the website";
 
-	$result = getStats($letter, $semester, $CAC); 
+	$result = getStats($letter, $semester, $type); 
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
-	}
+	echo $expectedResult . ' <br />';
+	echo $result . ' <br />';
 
-	else{
-		echo "FAILURE";
-	}
+	// if($result == $expectedResult) {
+	// 	return "SUCCESS <br />";
+	// }
+
+	// else{
+	// 	return "FAILURE <br />";
+	// }
 }
 
 function testGetRubricDescriptions() {
 	$letter = "A";
 	$type = "CAC";
+ 
+	$expectedResult="Able to apply math concepts to problems";
 
-	$expectedResult="";
+	$result = getRubricDescriptions($letter, $type);
 
-	$result = $getRubricDescriptions($letter, $type);
-
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result[0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -40,16 +44,17 @@ function testGetDescription() {
 	$letter = "A";
 	$type = "CAC";
 
-	$expectedResult="";
+	$expectedResult="An ability to apply knowledge of computing and 
+	mathematics appropriate to the discipline";
 
-	$result = $getDescriptions($letter, $type);
+	$result = getDescriptions($letter, $type);
 
 	if($result == $expectedResult) {
-		echo "SUCCESS";
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -63,11 +68,11 @@ function testGetForms() {
 	$result = getForms($instructor, $semester, $courseId);
 
 	if($result == $expectedResult) {
-		echo "SUCCESS";
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -80,11 +85,11 @@ function testGetFormTypes() {
 	$result = getFormTypes($CACOutcomes, $EACOutcomes);
 
 	if($result == $expectedResult) {
-		echo "SUCCESS";
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -92,16 +97,16 @@ function testGetCourseList() {
 	$instructor = "test";
 	$semester = "Spring2015";
 	
-	$expectedResult="";
+	$expectedResult='testCourse';
 
 	$result = getCourseList($instructor, $semester);
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result[0]['course'] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -110,32 +115,31 @@ function testGetStudents() {
 	$semester = "Spring2015";
 	$courseId = "testCourse";
 
-	$expectedResult="";
+	$expectedResult="roolo berger";
 
-	$result = getStudents($courseID, $instructor, $semester);
-
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	$result = getStudents($courseId, $instructor, $semester);
+	if($result[0][0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
-function testGetCourseNameAndOutcome() {
+function testGetCourseNameAndOutcomes() {
 	$courseId = "testCourse";
 
-	$expectedResult="";
+	$expectedResult="Test Course";
 
-	$result = getCourseNameAndOutcomes($courseID);
+	$result = getCourseNameAndOutcomes($courseId);
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result[0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
@@ -143,61 +147,61 @@ function testGetMeasuredOutcomes() {
 	$semester = "Spring2015";
 	$courseId = "testCourse";
 
-	$expectedResult="";
+	$expectedResult="A";
 
 	$result = getMeasuredOutcomes($semester, $courseId);
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result[0][0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}
 }
 
 function testGetSemesterOutcomes() {
 	$semester = "Spring2015";
 
-	$expectedResult="";
+	$expectedResult="A";
 
 	$result = getSemesterOutcomes($semester);
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result['CACOutcomes'][0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}	
 }
 
 function testGetCourseOutcomes() {
 	$courseId = "testCourse";
 
-	$expectedResult="";
+	$expectedResult="A";
 
 	$result = getCourseOutcomes($courseId);
 
-	if($result == $expectedResult) {
-		echo "SUCCESS";
+	if($result['CACOutcomes'][0] == $expectedResult) {
+		return "SUCCESS <br />";
 	}
 
 	else{
-		echo "FAILURE";
+		return "FAILURE <br />";
 	}	
 }
 
-echo "getStats: " . testGetStats();
-echo "getRubricDescriptions: " . testGetRubricDescriptions();
-echo "getDescription: " . testGetRubricDescriptions();
-echo "getForms: " . testGetForms();
-echo "getFormTypes: " . testGetFormTypes();
-echo "getCourseList: " . testGetCourseList();
-echo "getStudents: " . testGetStudents();
-echo "getCourseNameAndOutcomes: " . testGetCourseNameAndOutcomes();
-echo "getMeasuredOutcomes: " . testGetMeasuredOutcomes();
-echo "getSemesterOutcomes: " . testGetSemesterOutcomes();
-echo "getCourseOutcomes: " . testGetCourseOutcomes();
+//echo "getStats: " . testGetStats() . "TEST <br/>" . "<br/>";
+echo "getRubricDescriptions: " . testGetRubricDescriptions() . "<br/>";
+echo "getDescription: " . testGetRubricDescriptions() . "<br/>";
+echo "getForms: " . testGetForms() . "<br/>";
+echo "getFormTypes: " . testGetFormTypes() . "<br/>";
+echo "getCourseList: " . testGetCourseList() . "<br/>";
+echo "getStudents: " . testGetStudents() . "<br/>";
+echo "getCourseNameAndOutcomes: " . testGetCourseNameAndOutcomes() . "<br/>";
+echo "getMeasuredOutcomes: " . testGetMeasuredOutcomes() . "<br/>";
+echo "getSemesterOutcomes: " . testGetSemesterOutcomes() . "<br/>";
+echo "getCourseOutcomes: " . testGetCourseOutcomes() . "<br/>";
 
 ?>
