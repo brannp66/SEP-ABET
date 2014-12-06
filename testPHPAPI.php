@@ -1,5 +1,6 @@
 <?php
 include 'phpAPI.php';
+error_reporting(0);
 
 function testGetStats() {
 	$letter = "A";
@@ -63,11 +64,11 @@ function testGetForms() {
 	$semester = "Spring2015";
 	$courseId = "testCourse";
 
-	$expectedResult="";
+	$expectedResult='Test Course';
 
 	$result = getForms($instructor, $semester, $courseId);
 
-	if($result == $expectedResult) {
+	if($result[0]->getCourseName() == $expectedResult) {
 		return "SUCCESS <br />";
 	}
 
@@ -80,11 +81,11 @@ function testGetFormTypes() {
 	$CACOutcomes = array("A", "H", "G");
 	$EACOutcomes = array("A", "D", "G");
 
-	$expectedResult="";
+	$expectedResult="G";
 
 	$result = getFormTypes($CACOutcomes, $EACOutcomes);
 
-	if($result == $expectedResult) {
+	if($result[0]['EAC'] == $expectedResult) {
 		return "SUCCESS <br />";
 	}
 
