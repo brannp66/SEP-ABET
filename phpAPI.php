@@ -88,20 +88,31 @@ class Form {
 	}
 }
 
+
+
+
+/*
+*	gets statistics based on EAC or CAC and the letter
+*
+*	$letter = letter of form
+*	$type = CAC or EAC
+*	$semester = semester the class was in
+*/
 function getStats($letter, $type, $semester){
 
-	$m = new MongoClient(); //connect
-	$db = $m->selectDB("ABET");
+	$m = new MongoClient(); //connect to mongo
+	$db = $m->selectDB("ABET"); //select the database
 
 	$allResults = new MongoCollection($db, 'Results');
 
 	$type = strtoupper($type);
 	$letter = strtoupper($letter);
 
-	$type = $type . 'Outcome';
+	$type = $type . 'Outcome'; //set the outcome type
 
-	$conditions = array('$and' => array(array($type => $letter), 
+	$conditions = array('$and' => array(array($type => $letter), 		
 		array('semester' => $semester)));
+	//set the conditions for finding the statistics for the outcome
 
 	$results = $allResults->find($conditions);
 
@@ -112,10 +123,15 @@ function getStats($letter, $type, $semester){
 	}
 
 	return $outcomes;
-
-
 }
-
+/*
+*	get the description of a specific rubric
+*	
+*	
+*	$letter = letter of form
+*	$type = CAC or EAC
+*
+*/
 function getRubricDescriptions($letter, $type){
 	$m = new MongoClient(); //connect
 	$db = $m->selectDB("ABET");
@@ -128,7 +144,14 @@ function getRubricDescriptions($letter, $type){
 
 	return $result['rubrics'];
 }
-
+/*
+*	gets the description of the outcome
+*
+*	$letter = letter of form
+*	$type = CAC or EAC
+*
+*
+*/
 function getDescription($letter, $type) {
 	$m = new MongoClient(); //connect
 	$db = $m->selectDB("ABET");
@@ -216,6 +239,13 @@ function getFormTypes($CACOutcomes, $EACOutcomes) {
 	return $forms;
 }
 
+/*
+*
+*	gets the list of courses taught by a professor for a semester
+*
+*	$instructor = the teacher of a class
+*	$semester = the semester taught
+*/
 function getCourseList($instructor, $semester){
 	$client = new MongoClient();
 	$db = $client->selectDB('ABET');
@@ -236,7 +266,13 @@ function getCourseList($instructor, $semester){
 
 	return $courseList;
 }
-
+/*
+*	gets a list of all students in a class
+*
+*	$courseID = the ID number of a course
+*	$instructor = the teacher of a class
+*	$semester = semester class taught
+*/
 function getStudents($courseID, $instructor, $semester){
 
 	$client = new MongoClient();
@@ -255,7 +291,14 @@ function getStudents($courseID, $instructor, $semester){
 	$studentList = array($studentsCAC, $studentsEAC);
 	return $studentList;
 }
-
+/*
+*	get the name of a course and the outcomes for it
+*
+*	$courseID = id of the course
+*
+*
+*
+*/
 function getCourseNameAndOutcomes($courseID){
 
 	$client = new MongoClient();
@@ -284,6 +327,14 @@ function getCourseNameAndOutcomes($courseID){
 	return $courseInfo;
 }
 
+/**
+*
+*	get a list of outcomes measured for a semester
+*
+*	$semester = semester for outcomes
+*	$courseId = id of a course
+*
+*/
 function getMeasuredOutcomes($semester, $courseId){
 
 	$courseOutcomes = getCourseOutcomes($courseId);
@@ -313,7 +364,13 @@ function getMeasuredOutcomes($semester, $courseId){
 
 	return $commonOutcomes;
 }
-
+/*
+*	gets the outcomes for a smester
+*
+*	$semester = semester for outcomes
+*
+*
+**/
 function getSemesterOutcomes($semester){
 	$client = new MongoClient();
 	$db = $client->selectDB('ABET');
@@ -324,6 +381,12 @@ function getSemesterOutcomes($semester){
 	return $cycleOutcomes;
 }
 
+/*
+*	get outcomes for a course
+*
+*	$courseId = id of class
+*
+**/
 function getCourseOutcomes($courseId) {
 	$client = new MongoClient();
 	$db = $client->selectDB('ABET');
