@@ -88,9 +88,6 @@ class Form {
 	}
 }
 
-
-
-
 /*
 *	gets statistics based on EAC or CAC and the letter
 *
@@ -165,32 +162,51 @@ function getDescription($letter, $type) {
 	return $result['description'];
 }
 
+/*
+ * Returns an array with an entry for each form that can be generated fpr a class
+ * Each entry contains the data for one form
+ *
+ * $instructor = the instructor for the class
+ * $semester = the semester the class is being taught ex:Fall2014
+ * $courseId = the id for a course ex:cse3342
+ *
+ */
 function getForms($instructor, $semester, $courseId) {
 	$forms = array();
 
+	// Get the course Name and Outcomes that it measures
 	$courseInfo = getCourseNameAndOutcomes($courseId);
 	$courseName = $courseInfo[0];
 	
+	//Reduce the lists of outcomess to only the outcomes looked at in $semester
 	$outcomes = getMeasuredOutcomes($semester, $courseId);
 	$CACOutcomes = $outcomes[0];
 	$EACOutcomes = $outcomes[1];
 
+  //Get the students for the class
 	$students = getStudents($courseId, $instructor, $semester);
 
+	//Get the types of form
 	$formTypes = getFormTypes($CACOutcomes, $EACOutcomes);
+	
+	//Create form objects
 	foreach($formTypes as $formType) {
 		$name = "";
+		//Get CAC data if needed
 		if($formType['CAC']) {
 			$studentsCAC = $students[0];
 			$description = getDescription($formType['CAC'], "CAC");
 			$CACOutcome = $formType['CAC'];
 		}
+
+		//If CAC is not needed EAC is
 		else {
 			$studentsCAC = NULL;
 			$CACOutcome = NULL;
 			$description = getDescription($formType['EAC'], "EAC");
 		}
 
+		//Get EAC data if needed
 		if($formType['EAC']) {
 			$studentsEAC = $students[1];
 			$EACOutcome = $formType['EAC'];
@@ -200,8 +216,10 @@ function getForms($instructor, $semester, $courseId) {
 			$EACOutcome = NULL;
 		}
 
+		//get the rubrics
 		$rubrics = $formType["rubrics"];
 
+		//create form object and add to arry
 		$form = new Form($instructor, $semester, $courseId, $courseName, 
 										 $studentsCAC, $studentsEAC, $rubrics, $description, 
 										 $CACOutcome, $EACOutcome);
@@ -210,6 +228,14 @@ function getForms($instructor, $semester, $courseId) {
 	return $forms;
 }
 
+/*
+ * Gets the types of forms that can be generated for a form
+ * Matches CAC and EAC Outcomes to combine forms where possible
+ *
+ * $CACOutcomes = CAC outcomes that are being measured
+ * $EACOutcomes = EAC ourttcomes that are being measured
+ *
+ */
 function getFormTypes($CACOutcomes, $EACOutcomes) {
 	$forms = array();
 
@@ -219,23 +245,26 @@ function getFormTypes($CACOutcomes, $EACOutcomes) {
 	$matches = new MongoCollection($db, 'EACandCACMatchups');
 	$results = $matches->find();
 
+	//Match EAC and CAC outcomes
 	foreach($results as $result) {
+		//If there is a match add both outcomes
 		if(in_array($result['EAC'], $EACOutcomes) && 
 			 in_array($result['CAC'], $CACOutcomes)) {
 			$tempArray = array("CAC" => $result['CAC'], "EAC" => $result['EAC'], 
 												 "rubrics" => $result['rubrics']);
 			array_push($forms, $tempArray);
 		}
+		//If there is no match add the CAC Outcome by it self
 		else if(in_array($result['CAC'], $CACOutcomes)) {
 			$tempArray = array("CAC" => $result['CAC'], "rubrics" => $result['rubrics']);
 			array_push($forms, $tempArray);
 		}
+		//If ther is no match add EAC outcome by it self
 		else if(in_array($result['EAC'], $EACOutcomes)) {
 			$tempArray = array("EAC" => $result['EAC'], "rubrics" => $result['rubrics']);
 			array_push($forms, $tempArray);
 		}
 	}
-
 	return $forms;
 }
 
@@ -327,7 +356,7 @@ function getCourseNameAndOutcomes($courseID){
 	return $courseInfo;
 }
 
-/**
+/*
 *
 *	get a list of outcomes measured for a semester
 *
